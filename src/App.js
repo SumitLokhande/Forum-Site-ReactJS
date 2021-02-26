@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import Container from 'react-bootstrap/Container';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import {baseURL} from './common/constant';
 import {
   BrowserRouter as Router,
   Switch,
@@ -24,12 +25,12 @@ function App() {
   }, [])
 
   const fetchPost = async () => {
-    const res = await axios('https://jsonplaceholder.typicode.com/posts')
+    const res = await axios(`${baseURL}posts`)
     return res.data;
   }
 
   const fetchUserList = async () => {
-    const res = await axios('https://jsonplaceholder.typicode.com/users')
+    const res = await axios(`${baseURL}users`)
     return res.data
   }
 

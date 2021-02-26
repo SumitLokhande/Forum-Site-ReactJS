@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Button } from 'react-bootstrap'
 import { useHistory, useLocation } from 'react-router-dom'
+import { baseURL } from '../common/constant';
 // import { useNavigation } from '@react-navigation/native';
 
 function Dashboard() {
@@ -26,7 +27,7 @@ function Dashboard() {
     }, [])
 
     const fetchComments = async () => {
-        const res = await axios('https://jsonplaceholder.typicode.com/comments')
+        const res = await axios(`${baseURL}comments`)
         return res.data;
     }
     const mapComments = (data) => {
@@ -39,13 +40,14 @@ function Dashboard() {
 
     return (
         <div>
-            Dashboard
+            <h1>Dashboard
+             </h1>
+
+            <Post key={post.id} post={post} user={user} />
+            {commentsList.slice(0, 5).map((res) => { return mapComments(res) })}
             <Button variant="secondary" size="sm" onClick={() => history.goBack()}>
                 Back
     </Button>
-            <Post key={post.id} post={post} user={user} />
-            {commentsList.slice(0, 5).map((res) => { return mapComments(res) })}
-
         </div>
     )
 }

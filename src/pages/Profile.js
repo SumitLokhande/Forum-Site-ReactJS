@@ -5,8 +5,8 @@ import { Button } from 'react-bootstrap'
 function Profile() {
     const history = useHistory();
     const location = useLocation();
-    console.log(location.state.data)
-
+    const user=location.state.data[0]
+    console.log(user)
     return (
         <div>
             <Button variant="secondary" size="sm" onClick={() => history.goBack()}>
@@ -17,12 +17,24 @@ function Profile() {
                 <ListGroup variant="flush">
                     <ListGroup.Item className='justify-between'>
                         <p>User Name</p>
-                        <p>abc</p>
+                        <p>{user.username}</p>
                     </ListGroup.Item>
-                    <ListGroup.Item>Full Name</ListGroup.Item>
-                    <ListGroup.Item>Email</ListGroup.Item>
-                    <ListGroup.Item>Web Site</ListGroup.Item>
-                    <ListGroup.Item>Company Details</ListGroup.Item>
+                    <ListGroup.Item className='justify-between'>
+                        <p>Full Name</p>
+                        <p>{user.name}</p>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='justify-between'>
+                        <p>Email</p>
+                        <p>{user.email}</p>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='justify-between'>
+                        <p>Web Site</p>
+                        <p>{user.website}</p>
+                    </ListGroup.Item>
+                    <ListGroup.Item className='justify-between'>
+                        <p>Company Details</p>
+                        <p>{user.company.name}</p>
+                    </ListGroup.Item>
                 </ListGroup>
             </Jumbotron>
         </div>
