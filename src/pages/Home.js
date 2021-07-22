@@ -17,8 +17,9 @@ const Home = ({ allData }) => {
           return mapPost(post)
         })}
       </Jumbotron>
-
+        { 0 && 'text'}
     </div>
+    
   )
 }
 

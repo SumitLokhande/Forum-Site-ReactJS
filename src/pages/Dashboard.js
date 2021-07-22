@@ -24,7 +24,7 @@ function Dashboard() {
 
         }
         getCommentsList()
-    }, [])
+    })
 
     const fetchComments = async () => {
         const res = await axios(`${baseURL}comments`)

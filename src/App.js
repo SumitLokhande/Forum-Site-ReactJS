@@ -4,9 +4,11 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Container from 'react-bootstrap/Container';
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import {baseURL} from './common/constant';
+import { useState, useEffect} from 'react'
+import { useDispatch,useStore ,useSelector } from "react-redux";
+
+
+import { getData } from "./redux/actions/PostActions";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,23 +17,27 @@ import {
 } from "react-router-dom";
 function App() {
   const [applicationData, applicationDataHandler] = useState([])
+  const dispatch = useDispatch();
+  const store = useStore()
+  console.log (store,'store')
   useEffect(() => {
     const getAppData = async () => {
-      const postsList = await fetchPost()
+       dispatch(getData())
+      
+      console.log (postsList,'postsList')
       const userList = await fetchUserList()
       applicationDataHandler({ postsList, userList });
     }
     getAppData()
-  }, [])
 
-  const fetchPost = async () => {
-    const res = await axios(`${baseURL}posts`)
-    return res.data;
-  }
+  }, [])
+  const postsList = useSelector(state => state.postsList)
+  // console.log (store.getState(),'store')
+ console.log (postsList,'postsList')
 
   const fetchUserList = async () => {
-    const res = await axios(`${baseURL}users`)
-    return res.data
+    // const res = await axios(`${baseURL}users`)
+    // return res.data
   }
 
   return (
@@ -51,7 +57,7 @@ function App() {
                 <Dashboard />
               </Route>
               <Route path="/" exact>
-                {applicationData.postsList && applicationData.userList ? <Home allData={applicationData} /> : ''}
+                {applicationData.postsList && applicationData.userList && <Home allData={applicationData} />}
               </Route>
             </Switch>
           </div>
